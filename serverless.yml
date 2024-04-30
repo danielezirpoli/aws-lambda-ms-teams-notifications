@@ -1,0 +1,17 @@
+service: ms-teams-notifications
+
+provider:
+  name: aws
+  runtime: java11
+  memorySize: 1024
+  stage: ${opt:stage,'dev'}
+  region: ${opt:region, 'us-east-1'}
+  iam:
+    role: arn:aws:iam::2473803663:role/ms-teams-notifications
+
+package:
+  artifact: target/lambda-ms-teams-notifications.jar
+
+functions:
+  sns-to-teams:
+    handler: com.danzir.handler.HandlerSNS
